@@ -261,6 +261,7 @@ let renderUSer = (users) => {
         createElem(item.company,'catchPhrase','p',card,'Catch Phrase: ','fz-12 mb-1')
         createElem(item.company,'bs','p',card,'BS: ','fz-12 mb-1')
         createElem(item.address.geo,['lat','lng'],'p',card,'GEO location: ','fz-12 mb-1 text-white text-right')
+        createElem(item,'id','p',card,'id: ','idUser position-absolute')
         document.getElementsByClassName('cards')[0].append(card)
     })
 }
