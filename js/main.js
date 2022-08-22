@@ -231,55 +231,38 @@ const users = [
     }
 ];
 
+let createElem = (obj, value, tag , path, stringName,style) => {
+    let el = document.createElement(`${tag}`)
+    el.classList = style
+    if (stringName === undefined) stringName = ""
+    if (Array.isArray(value) && value.length > 1) {
+        let tmp = ""
+        value.forEach((item)=>{
+          if (obj[item] !== undefined )tmp += "  " + obj[item]
+            console.log(obj[item])
+        })
+        el.innerHTML = stringName + tmp
+    }else {
+        el.innerHTML = stringName + obj[value]
+    }
+    path.append(el)
+}
+
 let renderUSer = (users) => {
     users.forEach((item) => {
+        console.log(item)
         let card = document.createElement("div")
-        card.classList = "col-12 col-md-6  px-4  bg-primary mb-3 p-0 border position-relative shadow"
-        let userNickName = document.createElement("h3")
-        userNickName.classList = "text-center  text-white mb-2"
-        userNickName.innerHTML = item.username
-        let userName = document.createElement("h5")
-        userName.innerHTML = `Name : ` + item.name
-        let address = document.createElement("p")
-        address.classList = "fz-12 mb-1"
-        address.innerHTML = `Address : ${item.address.street}, ${item.address.suite}, ${item.address.city}`
-        let zipCode = document.createElement('p')
-        zipCode.classList = " mb-1 fz-12"
-        zipCode.innerHTML = `Zip-code: ${item.address.zipcode}`
-        let phone = document.createElement("p")
-        phone.classList = "fz-12 mb-1"
-        let email = document.createElement("a")
-        email.innerHTML = `${item.email}`
-        email.classList = "text-white fz-12"
-        let eContact = document.createElement("p")
-        eContact.classList = "fz-12 mb-1"
-        eContact.textContent = "Email: "
-        let webSite = document.createElement('a')
-        webSite.innerHTML = item.website
-        webSite.classList = "text-white fz-12 mb-1"
-        let webSiteP = document.createElement('p')
-        webSiteP.textContent = "WebSite : "
-        webSiteP.classList = "fz-12 mb-1"
-        webSiteP.append(webSite)
-        eContact.append(email)
-        phone.innerHTML = `Phone number: : ${item.phone}`
-        let company = document.createElement("p")
-        company.innerHTML = `Company name : ${item.company.name} `
-        company.classList = "fz-12 mb-1"
-        let catchPhrase = document.createElement('p')
-        catchPhrase.innerHTML = `Cath Phrase : ${item.company.catchPhrase}`
-        catchPhrase.classList = "fz-12 mb-1 "
-        let bs = document.createElement('p')
-        bs.innerHTML = `BS : ${item.company.bs}`
-        bs.classList = 'fz-12 mb-1'
-        let location = document.createElement("p")
-        location.innerHTML = `GEO Location:  lat: ${item.address.geo.lat} lng: ${item.address.geo.lng}`
-        location.classList = "fz-12 text-right mb-1 "
-        let idUSer = document.createElement('p')
-        idUSer.innerHTML = item.id
-        idUSer.classList = "mb-0 position-absolute idUser"
-        card.append(userNickName, userName, address, phone, zipCode, eContact, webSiteP, company, catchPhrase, bs, location,idUSer)
-        document.getElementsByClassName(`cards`)[0].append(card)
+        card.classList = "col-12 col-md-6  px-4  bg-primary mb-3 p-0 border position-relative shadow card"
+        createElem(item, 'username', 'h3', card, '','text-white text-center')
+        createElem(item, 'name', 'h5', card,"Name: ")
+        createElem(item,'phone','p',card,"Phone: ","fz-12 mb-1 ")
+        createElem(item,'website',"p",card,"Website: ",'fz-12 mb-1')
+        createElem(item.address,["street",'suite','zipcode'],'p',card,"Address: ",'fz-12 mb-1' )
+        createElem(item,['email','website'],'p',card,"eContacts: ",'fz-12 mb-1 text-white' )
+        createElem(item.company,'name','p',card,"Company name: ",'fz-12 mb-1' )
+        createElem(item.company,'catchPhrase','p',card,'Catch Phrase: ','fz-12 mb-1')
+        createElem(item.company,'bs','p',card,'BS: ','fz-12 mb-1')
+        createElem(item.address.geo,['lat','lng'],'p',card,'GEO location: ','fz-12 mb-1 text-white text-right')
     })
 }
 
