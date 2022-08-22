@@ -239,7 +239,6 @@ let createElem = (obj, value, tag , path, stringName,style) => {
         let tmp = ""
         value.forEach((item)=>{
           if (obj[item] !== undefined )tmp += "  " + obj[item]
-            console.log(obj[item])
         })
         el.innerHTML = stringName + tmp
     }else {
@@ -250,7 +249,6 @@ let createElem = (obj, value, tag , path, stringName,style) => {
 
 let renderUSer = (users) => {
     users.forEach((item) => {
-        console.log(item)
         let card = document.createElement("div")
         card.classList = "col-12 col-md-6  px-4  bg-primary mb-3 p-0 border position-relative shadow card"
         createElem(item, 'username', 'h3', card, '','text-white text-center')
