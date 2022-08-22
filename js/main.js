@@ -231,10 +231,9 @@ const users = [
     }
 ];
 
-let createElem = (obj, value, tag , path, stringName,style) => {
+let createElem = (obj, value, tag="div" , path, stringName="",style="") => {
     let el = document.createElement(`${tag}`)
     el.classList = style
-    if (stringName === undefined) stringName = ""
     if (Array.isArray(value) && value.length > 1) {
         let tmp = ""
         value.forEach((item)=>{
@@ -247,14 +246,13 @@ let createElem = (obj, value, tag , path, stringName,style) => {
     path.append(el)
 }
 
-let renderUSer = (users) => {
+let renderUser = (users) => {
     users.forEach((item) => {
         let card = document.createElement("div")
         card.classList = "col-12 col-md-6  px-4  bg-primary mb-3 p-0 border position-relative shadow card"
         createElem(item, 'username', 'h3', card, '','text-white text-center')
         createElem(item, 'name', 'h5', card,"Name: ")
         createElem(item,'phone','p',card,"Phone: ","fz-12 mb-1 ")
-        createElem(item,'website',"p",card,"Website: ",'fz-12 mb-1')
         createElem(item.address,["street",'suite','zipcode'],'p',card,"Address: ",'fz-12 mb-1' )
         createElem(item,['email','website'],'p',card,"eContacts: ",'fz-12 mb-1 text-white' )
         createElem(item.company,'name','p',card,"Company name: ",'fz-12 mb-1' )
@@ -266,4 +264,4 @@ let renderUSer = (users) => {
     })
 }
 
-renderUSer(users);
+renderUser(users);

@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1949705-c405-4576-8425-02fe36ed8584" name="Changes" comment="fixed document write">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +74,7 @@
       <workItem from="1660972604705" duration="2957000" />
       <workItem from="1660998443840" duration="10516000" />
       <workItem from="1661062466503" duration="23044000" />
-      <workItem from="1661154228536" duration="299000" />
+      <workItem from="1661154228536" duration="1101000" />
     </task>
     <task id="LOCAL-00001" summary="Start">
       <created>1660936463015</created>
