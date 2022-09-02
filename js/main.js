@@ -231,37 +231,69 @@ const users = [
     }
 ];
 
-let createElem = (obj, value, tag="div" , path, stringName="",style="") => {
-    let el = document.createElement(`${tag}`)
-    el.classList = style
-    if (Array.isArray(value) && value.length > 1) {
+let createElem = (obj, key, tag = "div", path, stringName = "", style = "", attribute) => {
+    let el = document.createElement(tag);
+    el.classList = style;
+    if (Array.isArray(key) && key.length > 1) {
         let tmp = ""
-        value.forEach((item)=>{
-          if (obj[item] !== undefined )tmp += "  " + obj[item]
+        key.forEach((item) => {
+            if (obj[item] !== undefined) tmp += "  " + obj[item]
         })
         el.innerHTML = stringName + tmp
-    }else {
-        el.innerHTML = stringName + obj[value]
+    } else {
+        if (obj[key] === undefined) el.innerHTML = stringName
+        else el.innerHTML = stringName + obj[key]
     }
+    if (attribute !== undefined) el.setAttribute(attribute, obj.id)
     path.append(el)
 }
 
 let renderUser = (users) => {
     users.forEach((item) => {
         let card = document.createElement("div")
-        card.classList = "col-12 col-md-6  px-4  bg-primary mb-3 p-0 border position-relative shadow card"
-        createElem(item, 'username', 'h3', card, '','text-white text-center')
-        createElem(item, 'name', 'h5', card,"Name: ")
-        createElem(item,'phone','p',card,"Phone: ","fz-12 mb-1 ")
-        createElem(item.address,["street",'suite','zipcode'],'p',card,"Address: ",'fz-12 mb-1' )
-        createElem(item,['email','website'],'p',card,"eContacts: ",'fz-12 mb-1 text-white' )
-        createElem(item.company,'name','p',card,"Company name: ",'fz-12 mb-1' )
-        createElem(item.company,'catchPhrase','p',card,'Catch Phrase: ','fz-12 mb-1')
-        createElem(item.company,'bs','p',card,'BS: ','fz-12 mb-1')
-        createElem(item.address.geo,['lat','lng'],'p',card,'GEO location: ','fz-12 mb-1 text-white text-right')
-        createElem(item,'id','p',card,'id: ','idUser position-absolute')
+        card.setAttribute("id", item.id)
+        card.classList = "col-12 col-md-5 m-2 px-4  mb-3 pb-4 position-relative card "
+        createElem(item, '', 'p', card, 'REMOVE', 'remove position-absolute', 'data-id',)
+        createElem(item, 'username', 'h3', card, '', 'text-white text-center user-property')
+        createElem(item, 'name', 'h5', card, "Name: ", 'name-property')
+        createElem(item, 'phone', 'p', card, "Phone: ", "fz-12 mb-1 ")
+        createElem(item.address, ["street", 'suite', 'zipcode'], 'p', card, "Address: ", 'fz-10 mb-1')
+        createElem(item, ['email'], 'p', card, "Email: ", 'fz-12 mb-1 text-white')
+        createElem(item.company, 'name', 'p', card, "Company : ", 'fz-12 mb-1')
+        createElem(item, ['website'], 'p', card, "", 'fz-12 mb-1 text-white text-center')
+        // createElem(item.company, 'catchPhrase', 'p', card, 'Catch Phrase: ', 'fz-12 mb-1')
+        // createElem(item.company, 'bs', 'p', card, 'BS: ', 'fz-12 mb-1')
+        createElem(item.address.geo, ['lat', 'lng'], 'p', card, 'GEO location: ', 'fz-12 mb-1 text-white ')
+        createElem(item, 'id', 'p', card, 'id: ', 'idUser position-absolute')
         document.getElementsByClassName('cards')[0].append(card)
     })
+
 }
 
 renderUser(users);
+let cardsList = document.querySelectorAll('.card')
+let cardsEvent = (element) => {
+    let focus = element.target.parentNode
+    if (element.target.tagName === "P" && element.target.innerHTML === "REMOVE") document.getElementById(element.target.dataset.id).remove()
+    if (focus.id !== "") focus.classList.toggle('active')
+    if (element.target.tagName === "DIV") element.target.classList.toggle('active')
+}
+let cardsListEvent = (arr) => {
+    arr.forEach(el => {
+        el.addEventListener('click', cardsEvent)
+    })
+}
+cardsListEvent(cardsList)
+
+let countItem = document.querySelectorAll('.counter')
+let counter = (element) => {
+    if (element.target.tagName === "I" && element.target.dataset.value === "+") document.getElementById(element.target.dataset.span).innerHTML++
+    if (element.target.tagName === "I" && element.target.dataset.value === "-") document.getElementById(element.target.dataset.span).innerHTML--
+}
+let start = (arr) => {
+    arr.forEach(el => {
+        el.addEventListener('click', counter)
+    })
+}
+start(countItem)
+
