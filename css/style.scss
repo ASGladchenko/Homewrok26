@@ -32,16 +32,15 @@ button{
   padding: 8px 90px;
 }
 .warning{
+  border: 2px solid black;
   background-color: #fc5a5a;
-  width: 50%;
   padding: 25px 20px;
   z-index: 3;
   color: white;
   font-size: 25px;
-  left: 30%;
-  top: 10%;
   display: none;
-
+  top: 120px;
+  left: 60px;
   i{
     position: absolute;
     right: 8px;

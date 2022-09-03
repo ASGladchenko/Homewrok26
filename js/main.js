@@ -247,28 +247,31 @@ let createElem = (obj, key, tag = "div", path, stringName = "", style = "", attr
     if (attribute !== undefined) el.setAttribute(attribute, obj.id)
     path.append(el)
 };
-let renderUser = (users) => {
+let renderUsers = (users) => {
     users.forEach((item) => {
-        let card = document.createElement("div")
-        card.setAttribute("id", item.id)
-        card.classList = "col-12 col-md-5 m-2 px-4  mb-3 pb-4 position-relative card "
-        createElem(item, '', 'p', card, 'REMOVE', 'remove position-absolute', 'data-id',)
-        createElem(item, 'username', 'h3', card, '', 'text-white text-center user-property')
-        createElem(item, 'name', 'h5', card, "Name: ", 'name-property')
-        createElem(item, 'phone', 'p', card, "Phone: ", "fz-12 mb-1 ")
-        createElem(item.address, ["street", 'suite', 'zipcode'], 'p', card, "Address: ", 'fz-10 mb-1')
-        createElem(item, ['email'], 'p', card, "Email: ", 'fz-12 mb-1 text-white')
-        createElem(item.company, 'name', 'p', card, "Company : ", 'fz-12 mb-1')
-        createElem(item, ['website'], 'p', card, "", 'fz-12 mb-1 text-white text-center')
-        // createElem(item.company, 'catchPhrase', 'p', card, 'Catch Phrase: ', 'fz-12 mb-1')
-        // createElem(item.company, 'bs', 'p', card, 'BS: ', 'fz-12 mb-1')
-        createElem(item.address.geo, ['lat', 'lng'], 'p', card, 'GEO location: ', 'fz-12 mb-1 text-white ')
-        createElem(item, 'id', 'p', card, 'id: ', 'idUser position-absolute')
-        document.getElementsByClassName('cards')[0].append(card)
+        renderUser(item)
     })
 
 };
-renderUser(users);
+let renderUser = (item) => {
+    let card = document.createElement("div")
+    card.setAttribute("id", item.id)
+    card.classList = "col-12 col-md-5 m-2 px-4  mb-3 pb-4 position-relative card "
+    createElem(item, '', 'p', card, 'REMOVE', 'remove position-absolute', 'data-id',)
+    createElem(item, 'username', 'h3', card, '', 'text-white text-center user-property')
+    createElem(item, 'name', 'h5', card, "Name: ", 'name-property')
+    createElem(item, 'phone', 'p', card, "Phone: ", "fz-12 mb-1 ")
+    createElem(item.address, ["street", 'suite', 'zipcode'], 'p', card, "Address: ", 'fz-10 mb-1')
+    createElem(item, ['email'], 'p', card, "Email: ", 'fz-12 mb-1 text-white')
+    createElem(item.company, 'name', 'p', card, "Company : ", 'fz-12 mb-1')
+    createElem(item, ['website'], 'p', card, "", 'fz-12 mb-1 text-white text-center')
+    // createElem(item.company, 'catchPhrase', 'p', card, 'Catch Phrase: ', 'fz-12 mb-1')
+    // createElem(item.company, 'bs', 'p', card, 'BS: ', 'fz-12 mb-1')
+    createElem(item.address.geo, ['lat', 'lng'], 'p', card, 'GEO location: ', 'fz-12 mb-1 text-white ')
+    createElem(item, 'id', 'p', card, 'id: ', 'idUser position-absolute')
+    document.getElementsByClassName('cards')[0].append(card)
+}
+renderUsers(users);
 let cards = select('.cards');
 let warning = select('.warning')
 let btnHide = select('.btnHide');
@@ -309,8 +312,7 @@ formHide.addEventListener('submit', (event) => {
     else {
         users.push(card)
         clearing(inputs)
-        document.getElementsByClassName('cards')[0].innerHTML = "";
-        renderUser(users);
+        renderUser(card);
     }
 
 });

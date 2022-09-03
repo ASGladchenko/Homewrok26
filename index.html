@@ -11,10 +11,10 @@
 </head>
 <body>
 <section class="pt-5 hw-28">
-    <div class="container px-4 text-center ">
-        <div class="warning m-auto position-fixed ">
+    <div class="container px-4 text-center position-relative ">
+        <div class="warning col-8  col-sm-10 col-md-11  m-auto position-absolute ">
             <i class="fa-regular fa-circle-xmark"></i>
-            <p>Please fill in all fields !!!</p>
+            <p class="pt-2">Please fill in all fields !!!</p>
         </div>
         <button class='ml-2 mb-3 bg-primary border text-white rounded btnHide'>Create new card</button>
         <form id="create_card" class="mb-4 form_start row justify-content-center border py-4 bg-primary">
@@ -26,7 +26,7 @@
             <label for="website"></label><input type="text" class="ml-md-2  col-10 col-md-5 bg-none mb-3" placeholder="Enter website :" id="website">
             <label for="company_name"></label><input type="text" class="mr-md-2 mr-1 col-10 col-md-5 bg-none mb-4" placeholder="Enter name of company :" id="company_name">
             <label for="card_id"></label><input type="text" class="ml-md-2 mr-1 col-10 col-md-5 bg-none mb-4" placeholder="Enter person id :" id="card_id">
-            <input type="submit" value="Send form" class="col-6" id="submit_create">
+            <input type="submit" value="Apply" class="col-6" id="submit_create">
         </form>
         <div class="text-left cards px-0 row d-flex justify-content-center"> </div>
 
