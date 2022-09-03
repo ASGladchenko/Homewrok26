@@ -246,8 +246,7 @@ let createElem = (obj, key, tag = "div", path, stringName = "", style = "", attr
     }
     if (attribute !== undefined) el.setAttribute(attribute, obj.id)
     path.append(el)
-}
-
+};
 let renderUser = (users) => {
     users.forEach((item) => {
         let card = document.createElement("div")
@@ -268,32 +267,80 @@ let renderUser = (users) => {
         document.getElementsByClassName('cards')[0].append(card)
     })
 
-}
-
+};
 renderUser(users);
-let cardsList = document.querySelectorAll('.card')
-let cardsEvent = (element) => {
-    let focus = element.target.parentNode
-    if (element.target.tagName === "P" && element.target.innerHTML === "REMOVE") document.getElementById(element.target.dataset.id).remove()
-    if (focus.id !== "") focus.classList.toggle('active')
-    if (element.target.tagName === "DIV") element.target.classList.toggle('active')
-}
-let cardsListEvent = (arr) => {
-    arr.forEach(el => {
-        el.addEventListener('click', cardsEvent)
+let cards = select('.cards');
+let warning = select('.warning')
+let btnHide = select('.btnHide');
+let formHide = select('#create_card')
+let elementToggle = (el, elToggle) => {
+    el.addEventListener('click', () => {
+        formHide.classList.toggle('form_toggle')
     })
-}
-cardsListEvent(cardsList)
+};
+elementToggle(btnHide, formHide);
+formHide.addEventListener('submit', (event) => {
+    let inputs = document.querySelectorAll(`input`);
+    let card = {
+        "id": selectValue(`#card_id`),
+        "name": selectValue(`#Name`),
+        "username": selectValue(`#NickName`),
+        "email": selectValue('#email'),
+        "address": {
+            "street": selectValue('#Address'),
+            "suite": "",
+            "city": "",
+            "zipcode": "",
+            "geo": {
+                "lat": "*******",
+                "lng": "*******"
+            }
+        },
+        "phone": selectValue('#Phone'),
+        "website": selectValue('#website'),
+        "company": {
+            "name": selectValue('#company_name'),
+            "catchPhrase": "",
+            "bs": ""
+        }
+    };
+    event.preventDefault();
+    if (!verification(inputs)) select('.warning').classList.add('d-block')
+    else {
+        users.push(card)
+        clearing(inputs)
+        document.getElementsByClassName('cards')[0].innerHTML = "";
+        renderUser(users);
+    }
 
-let countItem = document.querySelectorAll('.counter')
-let counter = (element) => {
-    if (element.target.tagName === "I" && element.target.dataset.value === "+") document.getElementById(element.target.dataset.span).innerHTML++
-    if (element.target.tagName === "I" && element.target.dataset.value === "-") document.getElementById(element.target.dataset.span).innerHTML--
+});
+cards.addEventListener('click', (event) => {
+    console.log()
+    if (event.target.closest('.card')) event.target.closest('.card').classList.toggle('active')
+    if (event.target.tagName === "P" && event.target.innerHTML === "REMOVE") event.target.closest('.card').remove()
+});
+warning.addEventListener('click',(event)=>{
+    if (event.target.tagName === "I") select('.warning').classList.remove('d-block')
+})
+function selectValue(selector) {
+    return document.querySelector(selector).value
+};
+function select(selector) {
+    return document.querySelector(selector)
 }
-let start = (arr) => {
-    arr.forEach(el => {
-        el.addEventListener('click', counter)
-    })
+function verification(arr) {
+    for (const element of arr) {
+        if (element.value === "") return false
+    }
+    return true
+};
+function clearing(arr) {
+    for (const element of arr) {
+        if (element.type !== "submit") element.value = ""
+
+    }
+
 }
-start(countItem)
+
+
 

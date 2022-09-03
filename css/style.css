@@ -30,6 +30,53 @@
   background: #007bfe;
 }
 
+button {
+  box-shadow: lightskyblue 0 0 15px;
+  transition: 0.33s;
+  padding: 8px 90px;
+}
+
+.warning {
+  background-color: #fc5a5a;
+  width: 50%;
+  padding: 25px 20px;
+  z-index: 3;
+  color: white;
+  font-size: 25px;
+  left: 30%;
+  top: 10%;
+  display: none;
+}
+.warning i {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  transition: 0.33s;
+}
+.warning i:hover {
+  color: black;
+  transition: 0.33s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  transition: 0.33s;
+}
+
+.form_start {
+  display: none;
+  padding-left: 8px;
+  transition: 0.5s;
+}
+
+.form_toggle {
+  display: block;
+}
+
+.hw-28 {
+  background: lightcyan;
+}
+
 .hw-27 i:hover {
   color: white;
 }
