@@ -274,11 +274,12 @@ let renderUser = (item) => {
 renderUsers(users);
 let cards = select('.cards');
 let warning = select('.warning')
+let success = select('.success')
 let btnHide = select('.btnHide');
 let formHide = select('#create_card')
 let elementToggle = (el, elToggle) => {
     el.addEventListener('click', () => {
-        formHide.classList.toggle('form_toggle')
+        elToggle.classList.toggle('form_toggle')
     })
 };
 elementToggle(btnHide, formHide);
@@ -308,11 +309,13 @@ formHide.addEventListener('submit', (event) => {
         }
     };
     event.preventDefault();
-    if (!verification(inputs)) select('.warning').classList.add('d-block')
+    if (!verification(inputs)) popUp(warning, 2000)
     else {
         users.push(card)
         clearing(inputs)
         renderUser(card);
+        popUp(success)
+
     }
 
 });
@@ -321,21 +324,29 @@ cards.addEventListener('click', (event) => {
     if (event.target.closest('.card')) event.target.closest('.card').classList.toggle('active')
     if (event.target.tagName === "P" && event.target.innerHTML === "REMOVE") event.target.closest('.card').remove()
 });
-warning.addEventListener('click',(event)=>{
-    if (event.target.tagName === "I") select('.warning').classList.remove('d-block')
+warning.addEventListener('click', (event) => {
+    if (event.target.tagName === "I") warning.classList.remove('d-block')
 })
+
 function selectValue(selector) {
     return document.querySelector(selector).value
-};
+}
+
 function select(selector) {
     return document.querySelector(selector)
 }
+
 function verification(arr) {
+    arr.forEach((element)=>{
+        if (element.value === "") element.classList.add('input_verification')
+        else  {element.classList.remove('input_verification')}
+    })
     for (const element of arr) {
         if (element.value === "") return false
     }
     return true
-};
+}
+
 function clearing(arr) {
     for (const element of arr) {
         if (element.type !== "submit") element.value = ""
@@ -344,5 +355,11 @@ function clearing(arr) {
 
 }
 
+function popUp(object, timeout = 1000) {
+    object.classList.add('d-block')
+    setTimeout(() => {
+        object.classList.remove('d-block')
+    }, timeout)
+}
 
 

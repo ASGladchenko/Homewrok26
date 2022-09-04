@@ -126,4 +126,19 @@ button:hover {
   min-width: 60px;
 }
 
+.success {
+  background-color: #18792c;
+  border: 1px solid black;
+  padding: 25px 20px;
+  z-index: 3;
+  color: white;
+  font-size: 25px;
+  top: 120px;
+  left: 60px;
+}
+
+.input_verification {
+  background-color: #f89c9c;
+}
+
 /*# sourceMappingURL=style.css.map */

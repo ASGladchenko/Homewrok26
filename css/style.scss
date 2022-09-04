@@ -1,37 +1,45 @@
 @import "bootstrap.css";
 @import "bootstrap.min.css";
-.fz-12{
+
+.fz-12 {
   font-size: 14px;
 }
-.fz-10{
+
+.fz-10 {
   font-size: 11px;
 }
-.idUser{
-  bottom : -15px;
-  left : 10px;
+
+.idUser {
+  bottom: -15px;
+  left: 10px;
   font-size: 20px;
   color: white;
 }
-.name-property{
+
+.name-property {
   text-shadow: #efefef 0 0 2px;
 
 }
-.user-property{
+
+.user-property {
   text-shadow: black 0 0 3px;
 }
-.card{
+
+.card {
   border-radius: 5px;
   transition: 0.25s;
   box-shadow: rgba(1, 67, 91, 0.91) 0 0 15px;
   background: #007bfe;
 
 }
-button{
+
+button {
   box-shadow: lightskyblue 0 0 15px;
   transition: 0.33s;
   padding: 8px 90px;
 }
-.warning{
+
+.warning {
   border: 2px solid black;
   background-color: #fc5a5a;
   padding: 25px 20px;
@@ -41,47 +49,56 @@ button{
   display: none;
   top: 120px;
   left: 60px;
-  i{
+
+  i {
     position: absolute;
     right: 8px;
     top: 8px;
     transition: 0.33s;
-    &:hover{
+
+    &:hover {
       color: black;
       transition: 0.33s;
     }
   }
 }
-button:hover{
+
+button:hover {
   transform: scale(1.05);
   transition: 0.33s;
 }
 
-.form_start{
+.form_start {
   display: none;
   padding-left: 8px;
   transition: 0.5s;
 }
-.form_toggle{
+
+.form_toggle {
   display: block;
 
 }
-.hw-28{
-  background:lightcyan;
+
+.hw-28 {
+  background: lightcyan;
 }
-.hw-27 i:hover{
+
+.hw-27 i:hover {
   color: white;
 }
-.active{
-   border: 1px solid black;
+
+.active {
+  border: 1px solid black;
   background: rgb(0, 156, 253);
 }
-.card:hover{
+
+.card:hover {
   transform: scale(1.03);
   transition: 0.25s;
   box-shadow: rgba(32, 80, 194, 32) 1px 1px 8px;
 }
-.remove{
+
+.remove {
   display: none;
   bottom: -13px;
   right: 6px;
@@ -95,21 +112,40 @@ button:hover{
   transition: 0.33s;
   border: 1px solid lightskyblue;
 }
+
 .remove:hover {
 
   transform: scale(1.05);
   transition: 0.33s;
 }
-.card:hover .remove{
+
+.card:hover .remove {
   display: block;
 }
-.counters-btn{
+
+.counters-btn {
   background-color: lightgray;
   border-radius: 30%;
   color: cyan;
 }
-.span-width{
+
+.span-width {
   text-align: center;
   min-width: 60px;
+
+}
+
+.success {
+  background-color: #18792c;
+  border: 1px solid black;
+  padding: 25px 20px;
+  z-index: 3;
+  color: white;
+  font-size: 25px;
+  top: 120px;
+  left: 60px;
+}
+.input_verification{
+  background-color: #f89c9c;
 
 }
