@@ -265,18 +265,18 @@ let renderUser = (item) => {
     createElem(item, ['email'], 'p', card, "Email: ", 'fz-12 mb-1 text-white')
     createElem(item.company, 'name', 'p', card, "Company : ", 'fz-12 mb-1')
     createElem(item, ['website'], 'p', card, "", 'fz-12 mb-1 text-white text-center')
-    // createElem(item.company, 'catchPhrase', 'p', card, 'Catch Phrase: ', 'fz-12 mb-1')
-    // createElem(item.company, 'bs', 'p', card, 'BS: ', 'fz-12 mb-1')
     createElem(item.address.geo, ['lat', 'lng'], 'p', card, 'GEO location: ', 'fz-12 mb-1 text-white ')
     createElem(item, 'id', 'p', card, 'id: ', 'idUser position-absolute')
     document.getElementsByClassName('cards')[0].append(card)
 }
 renderUsers(users);
+let mainCard = select('#main_card')
 let cards = select('.cards');
 let warning = select('.warning')
 let success = select('.success')
 let btnHide = select('.btnHide');
 let formHide = select('#create_card')
+let regExpPhone = /\+\d\d\(\d\d\d\)\d\d\d-\d\d-\d\d/g
 let elementToggle = (el, elToggle) => {
     el.addEventListener('click', () => {
         elToggle.classList.toggle('form_toggle')
@@ -284,7 +284,8 @@ let elementToggle = (el, elToggle) => {
 };
 elementToggle(btnHide, formHide);
 formHide.addEventListener('submit', (event) => {
-    let inputs = document.querySelectorAll(`input`);
+    event.preventDefault();
+    let inputs = formHide.querySelectorAll(`input`);
     let card = {
         "id": selectValue(`#card_id`),
         "name": selectValue(`#Name`),
@@ -300,7 +301,7 @@ formHide.addEventListener('submit', (event) => {
                 "lng": "*******"
             }
         },
-        "phone": selectValue('#Phone'),
+        "phone": validation(regExpPhone, selectValue('#Phone')),
         "website": selectValue('#website'),
         "company": {
             "name": selectValue('#company_name'),
@@ -308,8 +309,8 @@ formHide.addEventListener('submit', (event) => {
             "bs": ""
         }
     };
-    event.preventDefault();
-    if (!verification(inputs)) popUp(warning, 2000)
+
+    if (!verification(inputs) || card.phone === undefined) popUp(warning, 2000)
     else {
         users.push(card)
         clearing(inputs)
@@ -327,6 +328,13 @@ cards.addEventListener('click', (event) => {
 warning.addEventListener('click', (event) => {
     if (event.target.tagName === "I") warning.classList.remove('d-block')
 })
+mainCard.addEventListener('click', (event) => {
+    if (event.target.classList.contains('logout')) {
+        deleteCookie('user')
+        window.location.reload()
+    }
+})
+
 
 function selectValue(selector) {
     return document.querySelector(selector).value
@@ -337,9 +345,11 @@ function select(selector) {
 }
 
 function verification(arr) {
-    arr.forEach((element)=>{
+    arr.forEach((element) => {
         if (element.value === "") element.classList.add('input_verification')
-        else  {element.classList.remove('input_verification')}
+        else {
+            element.classList.remove('input_verification')
+        }
     })
     for (const element of arr) {
         if (element.value === "") return false
@@ -362,4 +372,9 @@ function popUp(object, timeout = 1000) {
     }, timeout)
 }
 
+function validation(regExp, value) {
+    if (regExp.test(value)) {
+        return value
+    }
+}
 

@@ -145,7 +145,43 @@ button:hover {
   top: 120px;
   left: 60px;
 }
-.input_verification{
-  background-color: #f89c9c;
 
+.input_verification {
+  background-color: #f89c9c;
+}
+
+.auth_main {
+  background-color: #007bfe;
+}
+
+body{
+  background-color: #dffdfe;
+}
+.logout{
+  z-index: 8;
+  top:-40px;
+  right: 0;
+}
+.access_denied{
+  border: 2px solid black;
+  background-color: #fc5a5a;
+  padding: 25px 20px;
+  z-index: 3;
+  color: white;
+  font-size: 25px;
+  display: none;
+  top: 10%;
+  left: 37%;
+
+}
+.access_success{
+  border: 2px solid black;
+  background-color: #18792c;
+  padding: 25px 20px;
+  z-index: 12;
+  color: white;
+  font-size: 25px;
+  display: none;
+  top: 10%;
+  left: 37%;
 }
